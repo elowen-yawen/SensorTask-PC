@@ -3,6 +3,8 @@ const { formatDataWithUnit } = require('../utils/helper')
 
 module.exports= async (req, res) => {
     try {
+        const onlineFilter = req.query.online;
+        
         // 获取字段映射
         const [fieldMapper] = await promisePool.query(
             `SELECT f_name,db_name,unit FROM t_sensor_field_mapper WHERE visible = 1`
@@ -18,12 +20,18 @@ module.exports= async (req, res) => {
         for (let key in fieldMapping) {
             searchMapper.push(`${key} AS \`${fieldMapping[key]}\``);
         }
-        searchMapper.push('online AS 数据类型');
         searchMapper.push('c_time AS 创立时间');
 
+        let whereClause = '';
+        let params = [];
+        if (onlineFilter) {
+            whereClause = ' WHERE online = ?';
+            params = [onlineFilter];
+        }
 
         const [sensorData] = await promisePool.query(
-            `SELECT ${searchMapper.join(',')} FROM t_sensor_data ORDER BY id`
+            `SELECT ${searchMapper.join(',')} FROM t_sensor_data${whereClause} ORDER BY id`,
+            params
         );
 
         const proccessData = formatDataWithUnit(sensorData, fieldMapping, fieldUnit)

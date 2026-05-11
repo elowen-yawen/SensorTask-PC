@@ -1,6 +1,6 @@
 <template>
     <div>  
-        <realTimeInfoTable />
+        <realTimeInfoTable online="保存数据" />
         <div class="chartContainer">
             <LineBar :data="data" :pageSize="pageSize"/>
         </div>

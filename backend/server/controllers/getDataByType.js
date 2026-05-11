@@ -3,6 +3,7 @@ const { formatDataWithUnit } = require('../utils/helper')
 
 module.exports= async (req, res) => {
     const type = req.query.type || 'sensor'
+    const onlineFilter = req.query.online || null;
     try {
         let dataTable = ''
         let fieldMappingTable = ''
@@ -40,7 +41,6 @@ module.exports= async (req, res) => {
         if (type === 'behavior') {
             searchMapper.push(`field5 as 采集时间`)
         }
-        searchMapper.push('online AS 数据类型');
         searchMapper.push('c_time AS 创立时间');
 
         const sql = `
@@ -49,7 +49,8 @@ module.exports= async (req, res) => {
             WHERE 1=1
               AND (? IS NULL OR c_time >= ?)
               AND (? IS NULL OR c_time <= ?)
-              AND (? IS NULL OR id = ? OR d_no LIKE ? OR online LIKE ?)
+              AND (? IS NULL OR id = ? OR d_no LIKE ?)
+              AND (? IS NULL OR online = ?)
             ORDER BY c_time desc
             LIMIT ? OFFSET ?
         `;
@@ -57,7 +58,8 @@ module.exports= async (req, res) => {
         const params = [
             startTime, startTime,
             endTime, endTime,
-            keyword, keyword, keywordLike, keywordLike,
+            keyword, keyword, keywordLike,
+            onlineFilter, onlineFilter,
             pageSize, offset
         ];
 
@@ -69,9 +71,10 @@ module.exports= async (req, res) => {
             WHERE 1=1
               AND (? IS NULL OR c_time >= ?)
               AND (? IS NULL OR c_time <= ?)
-              AND (? IS NULL OR id = ? OR d_no LIKE ? OR online LIKE ?)
+              AND (? IS NULL OR id = ? OR d_no LIKE ?)
+              AND (? IS NULL OR online = ?)
         `;
-        const [countResult] = await promisePool.query(countSql, params.slice(0, 8));
+        const [countResult] = await promisePool.query(countSql, params.slice(0, 9));
         const total = countResult[0].total;
 
         res.json({

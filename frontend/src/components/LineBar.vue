@@ -109,7 +109,7 @@ const updateChart = (source) => {
 // -------------------------
 watch(
   () => [props.data, props.pageSize],
-  () => {z
+  () => {
     if (mychart) {
       updateChart(props.data)
     }

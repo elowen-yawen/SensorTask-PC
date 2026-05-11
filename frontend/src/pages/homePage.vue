@@ -20,7 +20,7 @@ import CardContainer from '../components/CardContainer.vue'
 const store = sensorStore()
 const data=computed(()=>store.sensorData?.proccessData)
 onMounted(async () => {
-    await store.fetchData()
+    await store.fetchData('实时数据')
     console.log('数据：', store.sensorData)
 })
 </script>

@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
 
       
         let [deviceData] = await promisePool.query(
-            `SELECT number AS '电车编号id', device_name AS '设备名称', 
+             `SELECT id, number AS '电车编号id', device_name AS '设备名称', 
              remarks AS '备注', ctime AS '创建时间' 
              FROM t_device
              WHERE number LIKE ? OR device_name LIKE ?

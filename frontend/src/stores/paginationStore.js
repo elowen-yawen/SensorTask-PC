@@ -14,6 +14,7 @@ export const paginationStore = defineStore("paginationStore", () => {
             const response = await axios.get('http://localhost:3000/dataByType', {
                 params: {
                     type:params.type||'sensor',
+                    online: params.online || null,
                     page: params.currentPage || currentPage.value,
                     keyword: params.keyword || '',
                     startTime: params.startTime,

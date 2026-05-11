@@ -48,6 +48,13 @@ import { ref, onMounted } from 'vue'
 import { Search } from '@element-plus/icons-vue'
 import { paginationStore } from '../stores/paginationStore'
 
+const props = defineProps({
+  online: {
+    type: String,
+    default: ''
+  }
+})
+
 const paginationstore = paginationStore()
 const value = ref('')
 const input = ref('')
@@ -59,7 +66,8 @@ const handleSearch = async (page = 1) => {
         pageSize: pageSize.value,
         keyword: input.value,
         startTime: value.value?.[0],
-        endTime: value.value?.[1]
+        endTime: value.value?.[1],
+        online: props.online
     })
 }
 

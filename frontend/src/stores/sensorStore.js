@@ -4,8 +4,9 @@ import {ref} from 'vue'
 export const sensorStore=defineStore('sensorStore',()=>{
     const sensorData=ref({})
     const sensorValue=()=>sensorData.value
-    const fetchData=async ()=>{  
-        const respond=await fetch('/data')
+    const fetchData=async (online = '')=>{  
+        const url = online ? `/data?online=${encodeURIComponent(online)}` : '/data'
+        const respond=await fetch(url)
         const json=await respond.json()
         sensorData.value=json
     }
