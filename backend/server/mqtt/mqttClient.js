@@ -108,6 +108,7 @@ class MqttClient extends EventEmitter {
                     this.SaveBehaviorData(info)
                 }
             }
+            
             //错误数据接受
             if (topic === "ErrorData/add") {
                 info.c_time = new Date();
