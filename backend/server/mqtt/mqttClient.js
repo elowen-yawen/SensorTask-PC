@@ -128,7 +128,7 @@ class MqttClient extends EventEmitter {
                     this.SaveErrorData(info)
                 }
             }
-
+     
             //底层设备的反馈
             if (topic.startsWith('isAlive')) {
                 const id = topic.split("/").pop()
@@ -209,7 +209,6 @@ class MqttClient extends EventEmitter {
                 console.log("对方已经失联")
             }, 3000)
         }, 10000)//心脏跳动的频率为10s,如果3秒内没收到回复，就算对方失联
-
     }
 }
 
