@@ -6,7 +6,7 @@ import historyInfo from '../pages/historyInfo.vue';
 import deviceInfo from '../pages/deviceInfo.vue'
 import directPage from "../pages/directPage.vue";
 import behaviorRealTime from '../pages/behaviorRealTime.vue'
-const routes = [
+const routes = [                       
     {path:'/',redirect:'/home'},
     {path:'/home',component:homePage,name:'home'},
     {path:'/history-info',component:historyInfo,name:'historyInfo'},
