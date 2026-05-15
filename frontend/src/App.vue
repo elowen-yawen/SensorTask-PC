@@ -17,7 +17,7 @@ import { paginationStore } from '../src/stores/paginationStore'
 import SideBar from './components/SideBar.vue'
 import TopNav from './components/TopNav.vue'
 import { provide, computed } from 'vue'
-
+                                   
 const paginationstore = paginationStore()
 const currentType = computed(() => paginationstore.type)
 provide('currentType', currentType)
