@@ -6,9 +6,9 @@ const client=require('./mqtt/index')
 const app = express();
 app.use(cors());
 app.use(express.json());
-
+     
 app.use('/', sensorRoutes);
-
+       
 const distPath = path.join(__dirname, '../../frontend/dist');
 app.use(express.static(distPath));
 
