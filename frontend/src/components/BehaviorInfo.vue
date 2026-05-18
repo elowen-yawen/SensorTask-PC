@@ -77,7 +77,7 @@ const handlePageSizeChange = (size) => {
 
 onMounted(() => {
     handleSearch(1)
-})
+})       
 // 点击开始查询，另外设置页码，换页，都会重新从后台拿数据handleSearch
 </script>
 

@@ -88,7 +88,7 @@ onMounted(() => {
 <style>
 .input form {
     padding-bottom: 20px;
-    display: flex;
+    display: flex; 
 }
 .demo-pagination-block{
     margin-left:300px;
